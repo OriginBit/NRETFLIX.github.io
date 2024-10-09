@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NRETFLIX</title>
+    <link rel="icon" href="Logo.png" type="image/png"> <!-- Favicon -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: #121212;
+            color: white;
+            overflow-x: hidden;
+            position: relative; /* Added to position buttons */
+        }
+
+        /* Background vibes */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: url('https://www.tubefilter.com/wp-content/uploads/2019/02/netflix-new-animation-1920x1131.png') no-repeat center center/cover;
+            filter: brightness(40%);
+            z-index: -1;
+        }
+
+        /* Gangsta Header */
+        h1 {
+            text-align: center;
+            font-size: 4rem;
+            text-transform: uppercase;
+            color: #ff3344;
+            margin: 40px 0;
+            letter-spacing: 3px;
+            text-shadow: 2px 4px 10px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Content grid */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            padding: 20px;
+            width: 90%;
+            margin: auto;
+        }
+
+        /* Card style with neon and graffiti look */
+        .embed-section {
+            background-color: rgba(20, 20, 20, 0.9);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px #ff3344;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .embed-section:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 50px #002fff;
+        }
+
+        .embed-section img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(70%);
+            transition: filter 0.3s ease;
+        }
+
+        .embed-section:hover img {
+            filter: brightness(100%);
+        }
+
+        /* Play button with bold gangsta look */
+        .embed-section button {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 15px 30px;
+            background-color: #ff3344;
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .embed-section button:hover {
+            background-color: #002fff;
+            transform: translateX(-50%) translateY(-5px);
+        }
+
+        /* Modal for playing video */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .modal iframe {
+            width: 80%;
+            height: 80%;
+            border: 3px solid #ff3344;
+            border-radius: 20px;
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 3rem;
+            color: #ff3344;
+            cursor: pointer;
+            z-index: 101;
+        }
+
+        /* Gangsta chain animation */
+        .chain {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 100px;
+            background: url('https://source.unsplash.com/featured/?chain') no-repeat center/cover;
+            z-index: 10;
+            animation: chainSwing 3s infinite ease-in-out;
+        }
+
+        /* Chain swinging animation */
+        @keyframes chainSwing {
+            0%, 100% { transform: translateX(-50%) rotate(0deg); }
+            50% { transform: translateX(-50%) rotate(30deg); }
+        }
+
+        /* Responsive layout */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .embed-section {
+                width: 100%;
+            }
+
+            .modal iframe {
+                width: 90%;
+                height: 90%;
+            }
+        }
+
+        /* Credits Section */
+        .credits {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 1.5rem;
+            color: white;
+            z-index: 101;
+        }
+
+        /* Discord Button */
+        .discord-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 15px 30px;
+            background-color: #7289da; /* Discord color */
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            z-index: 101;
+        }
+
+        .discord-button:hover {
+            background-color: #5165b1; /* Darker shade on hover */
+            transform: translateY(-5px);
+        }
+
+        /* Copyright Section */
+        .copyright {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1rem;
+            color: white;
+            z-index: 101;
+        }
+    </style>
+</head>
+<body>
+    <h1>NRETFLIX</h1>
+
+    <!-- Swinging Chain for style -->
+    <div class="chain"></div>
+
+    <div class="content-wrapper">
+        <!-- Breaking Bad Section -->
+        <div class="embed-section">
+            <img src="Hood.PNG" alt="Breaking Bad">
+            <button onclick="openModal('https://embed.su/embed/tv/1396/1/1')">Watch Breaking Bad</button>
+        </div>
+
+        <!-- The Rookie Section -->
+        <div class="embed-section">
+            <img src="rookie.png" alt="The Rookie">
+            <button onclick="openModal('https://embed.su/embed/tv/79744/1/1')">Watch The Rookie</button>
+        </div>
+
+        <!-- Deadpool & Wolverine Movie -->
+        <div class="embed-section">
+            <img src="DVW.png" alt="Deadpool & Wolverine">
+            <button onclick="openModal('https://embed.su/embed/movie/533535')">Play Deadpool & Wolverine</button>
+        </div>
+
+        <!-- Jurassic World Movie -->
+        <div class="embed-section">
+            <img src="IT.png" alt="IT">
+            <button onclick="openModal('https://embed.su/embed/movie/346364')">Play IT</button>
+        </div>
+    </div>
+
+    <!-- Discord Button -->
+    <button class="discord-button" onclick="window.open('https://discord.gg/B7RAq2Hy8P')">Discord</button>
+
+    <!-- Copyright Section -->
+    <div class="copyright">
+        &copy; 2024 NRETFLIX. All rights reserved.
+    </div>
+
+    <!-- Modal for Full-Screen Embeds -->
+    <div id="embed-modal" class="modal">
+        <div class="close" onclick="closeModal()">×</div>
+        <iframe id="embed-player"></iframe>
+    </div>
+
+    <script>
+        // Open modal with the chosen embed link
+        function openModal(embedUrl) {
+            document.getElementById('embed-player').src = embedUrl;
+            document.getElementById('embed-modal').style.display = 'flex';
+        }
+
+        // Close modal and clear embed
+        function closeModal() {
+            document.getElementById('embed-player').src = '';
+            document.getElementById('embed-modal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
